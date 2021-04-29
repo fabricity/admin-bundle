@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="Fabricity\Bundle\AdminBundle\Layout\LayoutManagerInterface"
+                 alias="fabricity_bundle_admin.layout.layout_manager"/>
+
+        <service id="fabricity_bundle_admin.layout.layout_manager"
+                 class="Fabricity\Bundle\AdminBundle\Layout\LayoutManager">
+            <argument type="tagged_iterator" tag="fabricity.admin.layout"/>
+        </service>
+    </services>
+</container>
