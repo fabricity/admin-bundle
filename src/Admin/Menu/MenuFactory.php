@@ -20,6 +20,9 @@ final class MenuFactory
         $this->menuItemFactory = $menuItemFactory;
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function create(string $name, string $type, array $options): MenuInterface
     {
         /** @var MenuTypeInterface $resolvedType */

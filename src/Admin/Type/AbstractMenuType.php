@@ -9,6 +9,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractMenuType implements MenuTypeInterface
 {
+    /**
+     * @param array<string, mixed> $options
+     */
     public function build(MenuBuilderInterface $builder, array $options): void
     {
     }

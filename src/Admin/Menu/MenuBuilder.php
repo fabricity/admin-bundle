@@ -11,10 +11,14 @@ use Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItems;
 final class MenuBuilder implements MenuBuilderInterface
 {
     private string $name;
+    /** @var array<string, mixed> */
     private array $options;
     private MenuItemFactory $menuItemFactory;
     private MenuItems $menuItems;
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function __construct(string $name, array $options, MenuItemFactory $menuItemFactory)
     {
         $this->name = $name;

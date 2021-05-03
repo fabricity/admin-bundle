@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Fabricity\Bundle\AdminBundle\Admin\Menu;
 
+/**
+ * @implements \IteratorAggregate<int, MenuInterface>
+ */
 final class Menus implements \IteratorAggregate
 {
     /** @var MenuInterface[] */
@@ -16,6 +19,9 @@ final class Menus implements \IteratorAggregate
         }
     }
 
+    /**
+     * @return \Traversable<MenuInterface>
+     */
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->menus);

@@ -8,8 +8,12 @@ final class MenuItem implements MenuItemInterface
 {
     private string $name;
     private MenuItems $items;
+    /** @var array<string, mixed> */
     private array $options;
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function __construct(string $name, array $options)
     {
         $this->name = $name;

@@ -11,8 +11,12 @@ final class Menu implements MenuInterface
 {
     private string $name;
     private MenuItems $items;
+    /** @var array<string, mixed> */
     private array $options;
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function __construct(string $name, array $options, MenuItems $menuItems)
     {
         $this->name = $name;

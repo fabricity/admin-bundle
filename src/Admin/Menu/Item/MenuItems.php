@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Fabricity\Bundle\AdminBundle\Admin\Menu\Item;
 
+/**
+ * @implements \IteratorAggregate<MenuItemInterface>
+ */
 final class MenuItems implements \IteratorAggregate, \Countable
 {
     /** @var MenuItemInterface[] */
@@ -21,6 +24,9 @@ final class MenuItems implements \IteratorAggregate, \Countable
         return \count($this->items);
     }
 
+    /**
+     * @return \Traversable<MenuItemInterface>
+     */
     public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->items);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fabricity\Bundle\AdminBundle\DependencyInjection\Compiler;
 
+use Fabricity\Bundle\AdminBundle\Admin\Type\TypeInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -23,6 +24,9 @@ final class TypeRegisterPass implements CompilerPassInterface
         $this->register($definition, $container->findTaggedServiceIds('fabricity.admin.type.menu'));
     }
 
+    /**
+     * @param iterable<TypeInterface> $types
+     */
     private function register(Definition $definition, iterable $types): void
     {
         foreach ($types as $id => $tags) {

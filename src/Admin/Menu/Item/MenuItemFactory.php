@@ -8,7 +8,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MenuItemFactory
 {
-    public function create($name, array $options): MenuItemInterface
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function create(string $name, array $options): MenuItemInterface
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver, $name);
