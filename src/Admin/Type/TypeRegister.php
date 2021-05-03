@@ -14,7 +14,7 @@ final class TypeRegister
 
     private const TYPES = [
         self::LAYOUT => LayoutTypeInterface::class,
-        self::MENU   => MenuTypeInterface::class
+        self::MENU => MenuTypeInterface::class,
     ];
 
     public function resolve(string $typeName, string $class): TypeInterface
@@ -22,7 +22,7 @@ final class TypeRegister
         $resolved = $this->types[$typeName][$class] ?? null;
 
         if (null === $resolved) {
-            throw new \RuntimeException(sprintf('Could not resolve %s for %s', $typeName, $class));
+            throw new \RuntimeException(\sprintf('Could not resolve %s for %s', $typeName, $class));
         }
 
         return $resolved;

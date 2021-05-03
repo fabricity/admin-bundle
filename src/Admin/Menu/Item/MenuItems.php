@@ -53,7 +53,7 @@ final class MenuItems implements \IteratorAggregate, \Countable
 
     public function remove(MenuItemInterface $item): MenuItems
     {
-        $this->items = \array_filter($this->items, fn(MenuItemInterface $i) => $i !== $item);
+        $this->items = \array_filter($this->items, fn (MenuItemInterface $i) => $i !== $item);
 
         return $this;
     }

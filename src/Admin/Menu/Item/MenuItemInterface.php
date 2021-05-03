@@ -7,6 +7,7 @@ namespace Fabricity\Bundle\AdminBundle\Admin\Menu\Item;
 interface MenuItemInterface
 {
     public function getName(): string;
+
     public function getItems(): MenuItems;
 
     /**

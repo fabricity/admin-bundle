@@ -48,7 +48,7 @@ final class Menus implements \IteratorAggregate
 
     public function remove(MenuInterface $item): Menus
     {
-        $this->menus = \array_filter($this->menus, fn(MenuInterface $i) => $i !== $item);
+        $this->menus = \array_filter($this->menus, fn (MenuInterface $i) => $i !== $item);
 
         return $this;
     }

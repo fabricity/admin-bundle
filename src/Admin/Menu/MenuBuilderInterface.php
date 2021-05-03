@@ -19,6 +19,8 @@ interface MenuBuilderInterface
     public function addItem(string $name, array $options = []): MenuBuilderInterface;
 
     public function getItem(string $name): MenuItemInterface;
+
     public function hasItem(string $name): bool;
+
     public function removeItem(string $name): MenuBuilderInterface;
 }

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Fabricity\Bundle\AdminBundle\Controller;
 
-use App\Admin\Elements\DemoMenu;
 use Fabricity\Bundle\AdminBundle\Admin\Layout\LayoutFactoryInterface;
-use Fabricity\Bundle\AdminBundle\Admin\Menu\MenuFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 

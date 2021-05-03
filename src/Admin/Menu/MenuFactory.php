@@ -47,7 +47,7 @@ final class MenuFactory
                 'default_icon_class' => null,
                 'label' => null,
                 'label_translation_parameters' => [],
-                'translation_domain' => 'admin'
+                'translation_domain' => 'admin',
             ])
             ->setAllowedTypes('default_icon', ['null', 'string'])
             ->setAllowedTypes('default_icon_class', ['null', 'string'])
