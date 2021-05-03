@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="Fabricity\Bundle\AdminBundle\Admin\Menu\MenuFactory" alias="fabricity_bundle_admin.admin_menu.menu_factory" />
+
+        <service id="Fabricity\Bundle\AdminBundle\Admin\Layout\LayoutFactoryInterface" alias="fabricity_bundle_admin.admin_layout.layout_factory" />
+        <service id="fabricity_bundle_admin.admin_layout.layout_factory" class="Fabricity\Bundle\AdminBundle\Admin\Layout\LayoutFactory">
+            <argument type="service" id="fabricity_bundle_admin.admin_type.type_register"/>
+            <argument type="service" id="fabricity_bundle_admin.admin_menu.menu_factory"/>
+        </service>
+
+        <service id="fabricity_bundle_admin.admin_menu.menu_factory" class="Fabricity\Bundle\AdminBundle\Admin\Menu\MenuFactory">
+            <argument type="service" id="fabricity_bundle_admin.admin_type.type_register"/>
+            <argument type="service" id="fabricity_bundle_admin.admin_menu.menu_item_factory"/>
+        </service>
+        <service id="fabricity_bundle_admin.admin_menu.menu_item_factory" class="Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItemFactory" />
+
+        <service id="fabricity_bundle_admin.admin_type.type_register" class="Fabricity\Bundle\AdminBundle\Admin\Type\TypeRegister" />
+    </services>
+</container>
