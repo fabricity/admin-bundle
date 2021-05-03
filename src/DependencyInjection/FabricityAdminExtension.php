@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fabricity\Bundle\AdminBundle\DependencyInjection;
 
-use Fabricity\Bundle\AdminBundle\Layout\LayoutInterface;
+use Fabricity\Bundle\AdminBundle\Admin\Type as Type;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -21,8 +21,12 @@ final class FabricityAdminExtension extends Extension
         $loader->load('admin.xml');
 
         $container
-            ->registerForAutoconfiguration(LayoutInterface::class)
-            ->addTag('fabricity.admin.layout')
+            ->registerForAutoconfiguration(Type\LayoutTypeInterface::class)
+            ->addTag('fabricity.admin.type.layout')
+        ;
+        $container
+            ->registerForAutoconfiguration(Type\MenuTypeInterface::class)
+            ->addTag('fabricity.admin.type.menu')
         ;
     }
 }
