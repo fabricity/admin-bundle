@@ -8,18 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MenuItemFactory
 {
-    /**
-     * @param array<string, mixed> $options
-     */
-    public function create(string $name, array $options): MenuItemInterface
-    {
-        $resolver = new OptionsResolver();
-        $this->configureOptions($resolver, $name);
-        $options = $resolver->resolve($options);
-
-        return new MenuItem($name, $options);
-    }
-
     public function configureOptions(OptionsResolver $resolver, string $name): void
     {
         $resolver
@@ -31,6 +19,7 @@ final class MenuItemFactory
                 'translation_domain' => null,
                 'route' => null,
                 'route_parameters' => [],
+                'active' => false,
             ])
             ->setAllowedTypes('icon', ['null', 'string'])
             ->setAllowedTypes('icon_class', ['null', 'string'])
@@ -40,5 +29,17 @@ final class MenuItemFactory
             ->setAllowedTypes('route', ['null', 'string'])
             ->setAllowedTypes('route_parameters', ['array'])
         ;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    public function create(string $name, array $options): MenuItemInterface
+    {
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver, $name);
+        $options = $resolver->resolve($options);
+
+        return new MenuItem($name, $options);
     }
 }

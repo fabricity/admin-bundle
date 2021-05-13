@@ -11,9 +11,9 @@ interface MenuInterface
 {
     public function addItem(MenuItemInterface $item): void;
 
-    public function getName(): string;
-
     public function getItems(): MenuItems;
+
+    public function getName(): string;
 
     /**
      * @return array<string, mixed>

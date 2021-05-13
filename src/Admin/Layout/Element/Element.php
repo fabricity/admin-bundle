@@ -8,8 +8,8 @@ use Fabricity\Bundle\AdminBundle\Admin\Menu\Menus;
 
 final class Element implements ElementInterface
 {
-    private string $name;
     private Menus $menus;
+    private string $name;
 
     public function __construct(string $name)
     {
@@ -17,14 +17,14 @@ final class Element implements ElementInterface
         $this->menus = new Menus();
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
     public function getMenus(): Menus
     {
         return $this->menus;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function setMenus(Menus $menus): self

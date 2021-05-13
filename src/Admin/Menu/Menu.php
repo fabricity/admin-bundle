@@ -6,11 +6,12 @@ namespace Fabricity\Bundle\AdminBundle\Admin\Menu;
 
 use Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItemInterface;
 use Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItems;
+use Symfony\Component\HttpFoundation\Request;
 
 final class Menu implements MenuInterface
 {
-    private string $name;
     private MenuItems $items;
+    private string $name;
     /** @var array<string, mixed> */
     private array $options;
 
@@ -29,18 +30,31 @@ final class Menu implements MenuInterface
         $this->items->add($item);
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
     public function getItems(): MenuItems
     {
         return $this->items;
     }
 
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    public function handleRequest(Request $request): void
+    {
+        $route = $request->get('_route');
+
+        foreach ($this->getItems()->recursive() as $menuItem) {
+            $options = $menuItem->getOptions();
+
+            if ($options['route'] === $route) {
+                $menuItem->makeActive();
+            }
+        }
     }
 }

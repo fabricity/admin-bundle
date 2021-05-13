@@ -11,8 +11,8 @@ use Fabricity\Bundle\AdminBundle\Admin\Type\TypeRegister;
 
 final class LayoutFactory implements LayoutFactoryInterface
 {
-    private TypeRegister $typeRegister;
     private MenuFactory $menuFactory;
+    private TypeRegister $typeRegister;
 
     public function __construct(TypeRegister $typeRegister, MenuFactory $menuFactory)
     {

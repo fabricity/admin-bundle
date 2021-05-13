@@ -7,23 +7,41 @@ namespace Fabricity\Bundle\AdminBundle\Admin\Menu;
 use Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItemFactory;
 use Fabricity\Bundle\AdminBundle\Admin\Type\MenuTypeInterface;
 use Fabricity\Bundle\AdminBundle\Admin\Type\TypeRegister;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MenuFactory
 {
-    private TypeRegister $typeRegister;
     private MenuItemFactory $menuItemFactory;
+    private RequestStack $requestStack;
+    private TypeRegister $typeRegister;
 
-    public function __construct(TypeRegister $typeRegister, MenuItemFactory $menuItemFactory)
+    public function __construct(TypeRegister $typeRegister, MenuItemFactory $menuItemFactory, RequestStack $requestStack)
     {
         $this->typeRegister = $typeRegister;
         $this->menuItemFactory = $menuItemFactory;
+        $this->requestStack = $requestStack;
     }
 
     /**
      * @param array<string, mixed> $options
      */
     public function create(string $name, string $type, array $options): MenuInterface
+    {
+        $builder = $this->createBuilder($name, $type, $options);
+        $menu = $builder->getMenu();
+
+        if (null !== $currentRequest = $this->requestStack->getCurrentRequest()) {
+            $menu->handleRequest($currentRequest);
+        }
+
+        return $menu;
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     */
+    private function createBuilder(string $name, string $type, array $options): MenuBuilderInterface
     {
         /** @var MenuTypeInterface $resolvedType */
         $resolvedType = $this->typeRegister->resolve(TypeRegister::MENU, $type);
@@ -35,7 +53,7 @@ final class MenuFactory
         $builder = new MenuBuilder($name, $options, $this->menuItemFactory);
         $resolvedType->build($builder, $options);
 
-        return $builder->getMenu();
+        return $builder;
     }
 
     private function getOptionsResolver(): OptionsResolver

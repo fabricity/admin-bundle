@@ -10,11 +10,11 @@ use Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItems;
 
 final class MenuBuilder implements MenuBuilderInterface
 {
+    private MenuItemFactory $menuItemFactory;
+    private MenuItems $menuItems;
     private string $name;
     /** @var array<string, mixed> */
     private array $options;
-    private MenuItemFactory $menuItemFactory;
-    private MenuItems $menuItems;
 
     /**
      * @param array<string, mixed> $options
@@ -27,9 +27,12 @@ final class MenuBuilder implements MenuBuilderInterface
         $this->menuItems = new MenuItems();
     }
 
-    public function getMenu(): MenuInterface
+    public function addItem(string $name, array $options = []): MenuBuilderInterface
     {
-        return new Menu($this->name, $this->options, $this->menuItems);
+        $menuItem = $this->createItem($name, $options);
+        $this->menuItems->add($menuItem);
+
+        return $this;
     }
 
     public function createItem(string $name, array $options = []): MenuItemInterface
@@ -43,17 +46,14 @@ final class MenuBuilder implements MenuBuilderInterface
         return $this->menuItemFactory->create($name, $options);
     }
 
-    public function addItem(string $name, array $options = []): MenuBuilderInterface
-    {
-        $menuItem = $this->createItem($name, $options);
-        $this->menuItems->add($menuItem);
-
-        return $this;
-    }
-
     public function getItem(string $name): MenuItemInterface
     {
         return $this->menuItems->get($name);
+    }
+
+    public function getMenu(): Menu
+    {
+        return new Menu($this->name, $this->options, $this->menuItems);
     }
 
     public function hasItem(string $name): bool

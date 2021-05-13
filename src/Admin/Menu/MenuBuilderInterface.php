@@ -11,12 +11,12 @@ interface MenuBuilderInterface
     /**
      * @param array<string, mixed> $options
      */
-    public function createItem(string $name, array $options = []): MenuItemInterface;
+    public function addItem(string $name, array $options = []): MenuBuilderInterface;
 
     /**
      * @param array<string, mixed> $options
      */
-    public function addItem(string $name, array $options = []): MenuBuilderInterface;
+    public function createItem(string $name, array $options = []): MenuItemInterface;
 
     public function getItem(string $name): MenuItemInterface;
 

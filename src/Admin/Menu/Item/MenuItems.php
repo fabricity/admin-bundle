@@ -11,6 +11,7 @@ final class MenuItems implements \IteratorAggregate, \Countable
 {
     /** @var MenuItemInterface[] */
     private array $items = [];
+    private ?MenuItemInterface $parent = null;
 
     public function __construct(MenuItemInterface ...$items)
     {
@@ -19,9 +20,27 @@ final class MenuItems implements \IteratorAggregate, \Countable
         }
     }
 
+    public function add(MenuItemInterface ...$items): MenuItems
+    {
+        foreach ($items as $item) {
+            if ($this->hasParent()) {
+                $item->setParent($this->getParent());
+            }
+
+            $this->items[$item->getName()] = $item;
+        }
+
+        return $this;
+    }
+
     public function count(): int
     {
         return \count($this->items);
+    }
+
+    public function get(string $name): MenuItemInterface
+    {
+        return $this->items[$name];
     }
 
     /**
@@ -32,13 +51,9 @@ final class MenuItems implements \IteratorAggregate, \Countable
         return new \ArrayIterator($this->items);
     }
 
-    public function add(MenuItemInterface ...$items): MenuItems
+    public function getParent(): MenuItemInterface
     {
-        foreach ($items as $item) {
-            $this->items[$item->getName()] = $item;
-        }
-
-        return $this;
+        return $this->parent;
     }
 
     public function has(string $name): bool
@@ -46,9 +61,20 @@ final class MenuItems implements \IteratorAggregate, \Countable
         return isset($this->items[$name]);
     }
 
-    public function get(string $name): MenuItemInterface
+    public function hasParent(): bool
     {
-        return $this->items[$name];
+        return null !== $this->parent;
+    }
+
+    /**
+     * @return iterable<MenuItem>
+     */
+    public function recursive(): iterable
+    {
+        foreach ($this->items as $item) {
+            yield $item;
+            yield from $item->getItems()->recursive();
+        }
     }
 
     public function remove(MenuItemInterface $item): MenuItems
@@ -56,5 +82,10 @@ final class MenuItems implements \IteratorAggregate, \Countable
         $this->items = \array_filter($this->items, fn (MenuItemInterface $i) => $i !== $item);
 
         return $this;
+    }
+
+    public function setParent(?MenuItemInterface $parent): void
+    {
+        $this->parent = $parent;
     }
 }

@@ -16,6 +16,7 @@
         <service id="fabricity_bundle_admin.admin_menu.menu_factory" class="Fabricity\Bundle\AdminBundle\Admin\Menu\MenuFactory">
             <argument type="service" id="fabricity_bundle_admin.admin_type.type_register"/>
             <argument type="service" id="fabricity_bundle_admin.admin_menu.menu_item_factory"/>
+            <argument type="service" id="request_stack"/>
         </service>
         <service id="fabricity_bundle_admin.admin_menu.menu_item_factory" class="Fabricity\Bundle\AdminBundle\Admin\Menu\Item\MenuItemFactory" />
 

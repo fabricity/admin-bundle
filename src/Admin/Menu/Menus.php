@@ -19,14 +19,6 @@ final class Menus implements \IteratorAggregate
         }
     }
 
-    /**
-     * @return \Traversable<MenuInterface>
-     */
-    public function getIterator(): \Traversable
-    {
-        return new \ArrayIterator($this->menus);
-    }
-
     public function add(MenuInterface ...$menus): Menus
     {
         foreach ($menus as $menu) {
@@ -36,14 +28,22 @@ final class Menus implements \IteratorAggregate
         return $this;
     }
 
-    public function has(string $name): bool
-    {
-        return isset($this->menus[$name]);
-    }
-
     public function get(string $name): MenuInterface
     {
         return $this->menus[$name];
+    }
+
+    /**
+     * @return \Traversable<MenuInterface>
+     */
+    public function getIterator(): \Traversable
+    {
+        return new \ArrayIterator($this->menus);
+    }
+
+    public function has(string $name): bool
+    {
+        return isset($this->menus[$name]);
     }
 
     public function remove(MenuInterface $item): Menus

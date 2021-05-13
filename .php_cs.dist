@@ -16,7 +16,11 @@ return PhpCsFixer\Config::create()
         'declare_strict_types' => true,
         'final_class' => true,
         'native_function_invocation' => true,
-        'no_unused_imports' => true
+        'no_unused_imports' => true,
+        'ordered_class_elements' => [
+            'order' => ['use_trait', 'constant_public', 'constant_protected', 'constant_private', 'property_public', 'property_protected', 'property_private', 'construct', 'destruct', 'magic', 'phpunit', 'method_public', 'method_protected', 'method_private'],
+            'sort_algorithm' => 'alpha'
+        ]
     ])
     ->setRiskyAllowed(true)
     ->setFinder($finder)
